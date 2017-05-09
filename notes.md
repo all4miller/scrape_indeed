@@ -2,6 +2,8 @@ Rough Idea
 
 I want to keep a list of companies hiring for JS or Ruby devs in the Atlanta
 area.  In 3 months when I am ready to start looking I will use that list as a guide.
+Essentially automate my current process: look through indeed job alerts and add
+company names to google keep.
 
 Gem should do the following:
 
