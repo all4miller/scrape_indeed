@@ -16,3 +16,13 @@ user types in scrape_indeed
 user is prompted for city/state
 user is prompted for keywords
 scraper output is written to csv or excel file
+
+Data that should be in the spreadsheet:
+Company name
+Job title
+Short description
+Date posted
+
+List of gems for writing to a spreadsheet:
+spreadsheet-excel
+ExcelCSV
