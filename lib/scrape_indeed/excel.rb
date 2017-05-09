@@ -16,7 +16,7 @@ class ScrapeIndeed::Excel
   include Spreadsheet
 
   def self.write(data)
-    wb = Excel.new("text.xls")
+    wb = Excel.new(self.config_filename)
     f = Format.new
     f.color = "green"
     f.bold = true
@@ -25,5 +25,9 @@ class ScrapeIndeed::Excel
     ws.write(0,0, "Hello", f)
 
     wb.close
+  end
+
+  def self.config_filename
+    Dir.home() + "/Desktop/test.xls"
   end
 end
