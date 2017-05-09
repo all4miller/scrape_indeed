@@ -1,14 +1,7 @@
 # Controller
 class ScrapeIndeed::CLI
   def call
-    puts " _____                             _____          _               _"
-    puts "/  ___|                           |_   _|        | |             | |"
-    puts "\\ `--.  ___ _ __ __ _ _ __   ___    | | _ __   __| | ___  ___  __| |"
-    puts " `--. \\/ __| '__/ _` | '_ \\ / _ \\   | || '_ \\ / _` |/ _ \\/ _ \\/ _` |"
-    puts "/\\__/ / (__| | | (_| | |_) |  __/  _| || | | | (_| |  __/  __/ (_| |"
-    puts "\\____/ \\___|_|  \\__,_| .__/ \\___|  \\___/_| |_|\\__,_|\\___|\\___|\\__,_|"
-    puts "                     | |"
-    puts "                     |_|"
+    ScrapeIndeed::Graphic.display
     puts "Welcome to Scrape Indeed"
   end
 end
