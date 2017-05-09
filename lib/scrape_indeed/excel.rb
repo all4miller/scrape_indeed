@@ -28,6 +28,6 @@ class ScrapeIndeed::Excel
   end
 
   def self.config_filename
-    Dir.home() + "/Desktop/test.xls"
+    "#{Dir.home()}/Desktop/scraped-indeed-#{Date.today.to_s}.xls"
   end
 end
