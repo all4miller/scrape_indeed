@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "scrape_indeed"
   spec.version       = ScrapeIndeed::VERSION
   spec.authors       = ["Nick Bair"]
-  spec.email         = ["nickbair@golfingbuddha.com"]
+  spec.email         = ["bairinc@gmail.com"]
 
   spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
   spec.description   = %q{TODO: Write a longer description or delete this line.}
