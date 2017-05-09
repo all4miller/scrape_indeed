@@ -22,6 +22,7 @@ Company name
 Job title
 Short description
 Date posted
+City
 
 List of gems for writing to a spreadsheet:
 spreadsheet-excel
