@@ -17,12 +17,22 @@ class ScrapeIndeed::Excel
 
   def self.write(data)
     wb = Excel.new(self.config_filename)
-    f = Format.new
-    f.color = "green"
-    f.bold = true
-
     ws = wb.add_worksheet
-    ws.write(0,0, "Hello", f)
+
+    # Setup Column Headings
+    ws.write(0, 0, "Company")
+    ws.write(0, 1, "Job Title")
+    ws.write(0, 2, "City")
+    ws.write(0, 3, "Description")
+
+    data.each.with_index do |job, i|
+      # index + 1 will be row
+      # hard code column numbers
+      ws.write(i + 1, 0, job[:name])
+      ws.write(i + 1, 1, job[:title])
+      ws.write(i + 1, 2, job[:city])
+      ws.write(i + 1, 3, job[:description])
+    end
 
     wb.close
   end
