@@ -19,7 +19,10 @@ class ScrapeIndeed::CLI
     puts "Please enter keywords (comma or space separated)"
     keywords = gets.strip.downcase
 
-    ScrapeIndeed::Scrape.run(city, state, keywords)
+    data = ScrapeIndeed::Scrape.run(city, state, keywords)
     puts "Scraping...one moment"
+    ScrapeIndeed::Excel.write(data)
+    puts "Writing to file"
+    puts "Done"
   end
 end
