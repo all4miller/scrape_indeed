@@ -1,5 +1,2 @@
-require "scrape_indeed/version"
-
-module ScrapeIndeed
-  # Your code goes here...
-end
+require_relative './scrape_indeed/version'
+require_relative './scrape_indeed/cli'

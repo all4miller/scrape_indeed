@@ -1,4 +1,5 @@
-Class ScrapeIndeed::CLI
+# Controller
+class ScrapeIndeed::CLI
   def call
     puts " _____                             _____          _               _"
     puts "/  ___|                           |_   _|        | |             | |"
