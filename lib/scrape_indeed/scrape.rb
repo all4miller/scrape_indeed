@@ -52,6 +52,6 @@ class ScrapeIndeed::Scrape
     else
       query += "#{location}"
     end
+    "#{base_url}#{query}"
   end
-  "#{base_url}#{query}"
 end
