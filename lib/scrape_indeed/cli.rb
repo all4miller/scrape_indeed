@@ -24,7 +24,7 @@ class ScrapeIndeed::CLI
     data = ScrapeIndeed::Scrape.run(inputs)
     puts "Scraping...one moment"
     ScrapeIndeed::Excel.write(data)
-    puts "Writing to file"
+    puts "Writing #{data.length} results to file"
     puts "Done"
   end
 end
