@@ -1,7 +1,21 @@
 class ScrapeIndeed::Scrape
+  @@results = []
+  @@counter = 1
+
+  def self.results
+    @@results
+  end
+
   def self.run(data)
-    results = []
-    jobs = Nokogiri::HTML(open(prep_url(data))).css("#resultsCol").css(".row")
+    if @@counter == 1
+      doc = Nokogiri::HTML(open(prep_url(data)))
+    else
+      doc = Nokogiri::HTML(open("https://www.indeed.com/#{data}"))
+    end
+
+    jobs = doc.css("#resultsCol").css(".row")
+    # binding.pry
+    # next_page = pages[0]["href"]
 
     jobs.each do |job|
       details = {}
@@ -10,9 +24,20 @@ class ScrapeIndeed::Scrape
       details[:description] = job.css(".summary").text.strip
       details[:location] = job.css(".location").text.strip
 
-      results << details
+      @@results << details
     end
-    results
+
+    pages = doc.css(".pagination").css("a")
+    next_element = pages.detect { |p| p.css(".pn").text == @@counter.to_s }
+
+    if next_element.nil?
+      next_page = nil
+    else
+      next_page = next_element["href"]
+    end
+
+    @@counter += 1
+    self.run(next_page) if !next_page.nil?
   end
 
   def self.prep_url(data)

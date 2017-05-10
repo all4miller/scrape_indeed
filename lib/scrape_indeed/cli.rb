@@ -21,7 +21,8 @@ class ScrapeIndeed::CLI
     keywords = gets.strip.downcase.split(/,\s*| /)
     keywords.each { |k| inputs[:keywords] << k }
 
-    data = ScrapeIndeed::Scrape.run(inputs)
+    ScrapeIndeed::Scrape.run(inputs)
+    data = ScrapeIndeed::Scrape.results
     puts "Scraping...one moment"
     ScrapeIndeed::Excel.write(data)
     puts "Writing #{data.length} results to file"
