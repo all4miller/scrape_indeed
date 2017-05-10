@@ -4,7 +4,9 @@ class ScrapeIndeed::Excel
     wb = p.workbook
 
     wb.add_worksheet(:name => "Jobs") do |sheet|
-      sheet.add_row ["Company", "Job Title", "City", "Description"]
+      styles = wb.styles.add_style :b => true,
+        :border => { :style => :thin, :color => "000000", :edges => [:bottom] }
+      sheet.add_row ["Company", "Job Title", "City", "Description"], :style => styles
 
       data.each do |job|
         sheet.add_row [job[:name], job[:title], job[:city], job[:description]]
