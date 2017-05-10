@@ -1,16 +1,14 @@
 class ScrapeIndeed::Scrape
   def self.run(data)
     results = []
-    doc = Nokogiri::HTML(open(prep_url(data)))
-    jobs_col = doc.css("#resultsCol")
-    jobs = jobs_col.css(".row")
+    jobs = Nokogiri::HTML(open(prep_url(data))).css("#resultsCol").css(".row")
 
     jobs.each do |job|
       details = {}
       details[:name] = job.css(".company").css("span").text.strip
       details[:title] = job.css(".jobtitle").text.strip
-      details[:city] = job.css(".location").css("span").text.strip
       details[:description] = job.css(".summary").text.strip
+      details[:location] = job.css(".location").css("span").text.strip
 
       results << details
     end
