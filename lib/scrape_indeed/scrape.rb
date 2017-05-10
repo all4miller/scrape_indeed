@@ -5,10 +5,10 @@ class ScrapeIndeed::Scrape
 
     jobs.each do |job|
       details = {}
-      details[:name] = job.css(".company").css("span").text.strip
+      details[:name] = job.css(".company").text.strip
       details[:title] = job.css(".jobtitle").text.strip
       details[:description] = job.css(".summary").text.strip
-      details[:location] = job.css(".location").css("span").text.strip
+      details[:location] = job.css(".location").text.strip
 
       results << details
     end
