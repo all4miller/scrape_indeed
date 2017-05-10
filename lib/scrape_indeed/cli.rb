@@ -11,6 +11,7 @@ class ScrapeIndeed::CLI
 
     if input == "scrape"
       config_search
+      scraping
     else
       start_menu
     end
@@ -27,6 +28,9 @@ class ScrapeIndeed::CLI
     keywords.each { |k| inputs[:keywords] << k }
 
     ScrapeIndeed::Scrape.run(inputs)
+  end
+
+  def scraping
     puts "Scraping...one moment"
     ScrapeIndeed::Excel.write
     puts "Writing #{ScrapeIndeed::Job.all.length} results to file"
@@ -43,9 +47,28 @@ class ScrapeIndeed::CLI
     end
   end
 
+  def print_results(qty)
+    ScrapeIndeed::Job.all.take(qty).each.with_index do |e,i|
+      puts "#{i + 1}. #{e.title} @ #{e.company} in #{e.location}."
+    end
+  end
+
   def data_detail
-    puts "Printing first 5 results"
-    # print some results
-    puts "Type:\nMore - Print 5 more results\nBack - Back to main menu\n Line\# - Print out a description"
+    base_qty = 10
+
+    puts "Printing first 10 results"
+    print_results(base_qty)
+    puts "Type:\nMore - Print 5 more results:\nBack - Back to main menu\nLine \# - Print out a description"
+    input =  gets.strip.downcase
+
+    if input == "more"
+      print_results(base_qty + 5)
+    elsif input == "back"
+      start_menu
+    elsif /\A\d+\z/.match(input)
+      item = ScrapeIndeed::Job.all[input.to_i - 1]
+      puts "#{item.title} @ #{item.company} in #{item.location}, #{item.description}"
+      start_menu
+    end
   end
 end
