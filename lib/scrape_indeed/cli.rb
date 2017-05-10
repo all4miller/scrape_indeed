@@ -48,18 +48,28 @@ class ScrapeIndeed::CLI
       start_menu
     elsif input2 == "2"
       detail_menu
+    else
+      post_scrape
     end
   end
 
   def detail_menu
     puts "Type:\nPrint - Print 10 results\nBack - Back to main menu\n"
     input =  gets.strip.downcase
+    r = ScrapeIndeed::Job.all.length
 
-    if input == "print"
+    if input == "print" && r >= 10
       print_results(10)
       job_menu
+    elsif input == "print" && r < 10
+      print_results(r)
+    elsif input == "print" && r == 0
+      print "No results to print, refine your search"
+      start_menu
     elsif input == "back"
       start_menu
+    else
+      detail_menu
     end
   end
 
@@ -71,6 +81,8 @@ class ScrapeIndeed::CLI
       detail_menu
     elsif /\A\d+\z/.match(input)
       print_detail(input)
+      job_menu
+    else
       job_menu
     end
   end
