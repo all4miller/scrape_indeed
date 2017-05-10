@@ -1,5 +1,5 @@
 class ScrapeIndeed::Scrape
-  def self.run(city, state, keywords)
+  def self.run(data)
     # Sample url
     # https://www.indeed.com/jobs?q=javascript+ruby&l=Duluth%2C+GA
 
