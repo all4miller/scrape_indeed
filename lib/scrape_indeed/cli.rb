@@ -53,18 +53,25 @@ class ScrapeIndeed::CLI
 
   def detail_menu
     puts "Type:\nPrint - Print 10 results\nBack - Back to main menu\n"
-    # Line \# - Print out a description"
     input =  gets.strip.downcase
 
     if input == "print"
       print_results(10)
-      # Need another menu after this
-      # Give user option to drill into job or go back
+      job_menu
     elsif input == "back"
       start_menu
+    end
+  end
+
+  def job_menu
+    puts "Type:\nLine \# - Print out a description\nBack - Back to detail menu"
+    input = gets.strip.downcase
+
+    if input == "back"
+      detail_menu
     elsif /\A\d+\z/.match(input)
       print_detail(input)
-      start_menu
+      job_menu
     end
   end
 
