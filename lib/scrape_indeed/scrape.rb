@@ -27,7 +27,9 @@ class ScrapeIndeed::Scrape
 
     if keywords.length > 0
       query = "#{keywords}"
-    elsif !city.nil? && !state.nil?
+    end
+
+    if !city.nil? && !state.nil?
       query += "#{location}#{city}#{split}#{state}"
     elsif !city.nil? && state.nil?
       query += "#{location}#{city}"
