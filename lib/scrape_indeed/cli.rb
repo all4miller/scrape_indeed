@@ -22,10 +22,9 @@ class ScrapeIndeed::CLI
     keywords.each { |k| inputs[:keywords] << k }
 
     ScrapeIndeed::Scrape.run(inputs)
-    data = ScrapeIndeed::Scrape.results
     puts "Scraping...one moment"
-    ScrapeIndeed::Excel.write(data)
-    puts "Writing #{data.length} results to file"
+    ScrapeIndeed::Excel.write
+    puts "Writing #{ScrapeIndeed::Job.all.length} results to file"
     puts "Done => #{ScrapeIndeed::Excel.config_filename}"
   end
 end

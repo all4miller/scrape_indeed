@@ -1,10 +1,5 @@
 class ScrapeIndeed::Scrape
-  @@results = []
   @@counter = 1
-
-  def self.results
-    @@results
-  end
 
   def self.run(data)
     if @@counter == 1
@@ -17,7 +12,7 @@ class ScrapeIndeed::Scrape
 
     jobs.each do |job|
       details = {}
-      details[:name] = job.css(".company").text.strip
+      details[:company] = job.css(".company").text.strip
       details[:title] = job.css(".jobtitle").text.strip
       details[:description] = job.css(".summary").text.strip
       details[:location] = job.css(".location").text.strip
@@ -25,7 +20,7 @@ class ScrapeIndeed::Scrape
       url = title_div[0]["href"]
       details[:url] = "https://www.indeed.com#{url}"
 
-      @@results << details
+      ScrapeIndeed::Job.new(details)
     end
 
     pages = doc.css(".pagination").css("a")

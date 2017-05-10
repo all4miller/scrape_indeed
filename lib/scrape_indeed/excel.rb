@@ -1,5 +1,5 @@
 class ScrapeIndeed::Excel
-  def self.write(data)
+  def self.write
     p = Axlsx::Package.new
     wb = p.workbook
 
@@ -8,8 +8,8 @@ class ScrapeIndeed::Excel
         :border => { :style => :thin, :color => "000000", :edges => [:bottom] }
       sheet.add_row ["Company", "Job Title", "Location", "Description", "URL"], :style => styles
 
-      data.each do |job|
-        sheet.add_row [job[:name], job[:title], job[:location], job[:description], job[:url]]
+      ScrapeIndeed::Job.all.each do |job|
+        sheet.add_row [job.company, job.title, job.location, job.description, job.url]
       end
     end
     p.serialize self.config_filename
