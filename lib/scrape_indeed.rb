@@ -1,4 +1,4 @@
-require 'spreadsheet/excel'
+require 'axlsx'
 require 'date'
 require 'colorize'
 require 'nokogiri'
