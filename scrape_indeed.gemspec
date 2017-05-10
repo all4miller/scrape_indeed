@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_dependency "spreadsheet-excel", "~> 0.3.5.1"
   spec.add_dependency "colorize", "~> 0.8.1"
+  spec.add_dependency "nokogiri", "~> 1.6", ">= 1.6.8"
 end

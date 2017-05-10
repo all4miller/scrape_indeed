@@ -1,6 +1,8 @@
 require 'spreadsheet/excel'
 require 'date'
 require 'colorize'
+require 'nokogiri'
+require 'open-uri'
 
 require_relative './scrape_indeed/version'
 require_relative './scrape_indeed/cli'
