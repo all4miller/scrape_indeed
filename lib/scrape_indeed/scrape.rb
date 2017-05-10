@@ -14,8 +14,6 @@ class ScrapeIndeed::Scrape
     end
 
     jobs = doc.css("#resultsCol").css(".row")
-    # binding.pry
-    # next_page = pages[0]["href"]
 
     jobs.each do |job|
       details = {}
@@ -28,7 +26,7 @@ class ScrapeIndeed::Scrape
     end
 
     pages = doc.css(".pagination").css("a")
-    next_element = pages.detect { |p| p.css(".pn").text == @@counter.to_s }
+    next_element = pages.detect { |p| p.css(".pn").text == (@@counter + 1).to_s }
 
     if next_element.nil?
       next_page = nil
