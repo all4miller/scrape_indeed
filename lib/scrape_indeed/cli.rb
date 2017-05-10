@@ -28,7 +28,7 @@ class ScrapeIndeed::CLI
     keywords = gets.strip.downcase.split(/,\s*| /)
     keywords.each { |k| inputs[:keywords] << k }
 
-    ScrapeIndeed::Scrape.run(inputs)
+    ScrapeIndeed::Scrape.new.run(inputs)
   end
 
   def scraping

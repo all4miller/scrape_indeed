@@ -1,8 +1,12 @@
 class ScrapeIndeed::Scrape
-  @@counter = 1
+  attr_accessor :counter
 
-  def self.run(data)
-    if @@counter == 1
+  def initialize
+    @counter = 1
+  end
+
+  def run(data)
+    if @counter == 1
       doc = Nokogiri::HTML(open(prep_url(data)))
     else
       doc = Nokogiri::HTML(open("https://www.indeed.com/#{data}"))
@@ -29,7 +33,7 @@ class ScrapeIndeed::Scrape
     end
 
     pages = doc.css(".pagination").css("a")
-    next_element = pages.detect { |p| p.css(".pn").text == (@@counter + 1).to_s }
+    next_element = pages.detect { |p| p.css(".pn").text == (@counter + 1).to_s }
 
     if next_element.nil?
       next_page = nil
@@ -37,11 +41,11 @@ class ScrapeIndeed::Scrape
       next_page = next_element["href"]
     end
 
-    @@counter += 1
-    self.run(next_page) if !next_page.nil?
+    @counter += 1
+    run(next_page) if !next_page.nil?
   end
 
-  def self.prep_url(data)
+  def prep_url(data)
     base_url = "https://www.indeed.com/jobs?q="
     keywords = data[:keywords].join("+")
     location = "&l="
