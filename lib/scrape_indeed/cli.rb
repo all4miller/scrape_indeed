@@ -25,6 +25,6 @@ class ScrapeIndeed::CLI
     puts "Scraping...one moment"
     ScrapeIndeed::Excel.write(data)
     puts "Writing #{data.length} results to file"
-    puts "Done"
+    puts "Done => #{ScrapeIndeed::Excel.config_filename}"
   end
 end
