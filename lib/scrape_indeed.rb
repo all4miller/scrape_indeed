@@ -1,5 +1,5 @@
 require 'axlsx'
-require 'date'
+require 'securerandom'
 require 'colorize'
 require 'nokogiri'
 require 'open-uri'

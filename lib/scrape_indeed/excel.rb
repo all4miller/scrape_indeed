@@ -16,6 +16,6 @@ class ScrapeIndeed::Excel
   end
 
   def self.config_filename
-    "#{Dir.home()}/Desktop/scraped-indeed-#{Date.today.to_s}.xlsx"
+    "#{Dir.home()}/Desktop/scraped-indeed-#{SecureRandom.uuid}.xlsx"
   end
 end
