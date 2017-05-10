@@ -2,7 +2,7 @@
 class ScrapeIndeed::CLI
   def call
     ScrapeIndeed::Graphic.display
-    puts "Welcome to Scrape Indeed"
+    puts "Welcome to Scrape Indeed".colorize(:light_cyan)
     puts "Type 'scrape' to get started"
     input = gets.strip.downcase
 
