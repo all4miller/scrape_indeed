@@ -6,10 +6,10 @@ class ScrapeIndeed::Excel
     wb.add_worksheet(:name => "Jobs") do |sheet|
       styles = wb.styles.add_style :b => true,
         :border => { :style => :thin, :color => "000000", :edges => [:bottom] }
-      sheet.add_row ["Company", "Job Title", "Location", "Description"], :style => styles
+      sheet.add_row ["Company", "Job Title", "Location", "Description", "URL"], :style => styles
 
       data.each do |job|
-        sheet.add_row [job[:name], job[:title], job[:location], job[:description]]
+        sheet.add_row [job[:name], job[:title], job[:location], job[:description], job[:url]]
       end
     end
     p.serialize self.config_filename
