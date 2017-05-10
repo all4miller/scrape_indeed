@@ -3,6 +3,7 @@ require 'date'
 require 'colorize'
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 
 require_relative './scrape_indeed/version'
 require_relative './scrape_indeed/cli'

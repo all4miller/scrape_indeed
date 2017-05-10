@@ -1,37 +1,39 @@
 class ScrapeIndeed::Scrape
   def self.run(data)
-    # Scrape with nokogiri here
-    doc = Nokogiri::HTML(open(prep_url(data)))
-
     # Mock Return Data:
-    [{
-      :name => "Website Builders, Inc.",
-      :title => "Javascripter",
-      :city => "Atlanta",
-      :description => "Experience to a modern web application framework such as Ruby on Rails, Spring MVC, and Node.js. Experience in a web front-end technology and framework such as..."
-    },
-    {
-      :name => "Website Builders, Inc.",
-      :title => "Javascripter",
-      :city => "Atlanta",
-      :description => "Experience to a modern web application framework such as Ruby on Rails, Spring MVC, and Node.js. Experience in a web front-end technology and framework such as..."
-    }]
+    # [{
+    #   :name => "Website Builders, Inc.",
+    #   :title => "Javascripter",
+    #   :city => "Atlanta",
+    #   :description => "Experience to a modern web application framework such as Ruby on Rails, Spring MVC, and Node.js. Experience in a web front-end technology and framework such as..."
+    # },
+    # {
+    #   :name => "Website Builders, Inc.",
+    #   :title => "Javascripter",
+    #   :city => "Atlanta",
+    #   :description => "Experience to a modern web application framework such as Ruby on Rails, Spring MVC, and Node.js. Experience in a web front-end technology and framework such as..."
+    # }]
+
+    results = []
+    doc = Nokogiri::HTML(open(prep_url(data)))
+    # jobs = doc.css(".row .result")
+    jobs_col = doc.css("#resultsCol")
+    jobs = jobs_col.css(".row")
+
+    jobs.each do |job|
+      details = {}
+      details[:name] = job.css(".company").css("span").text.strip
+      details[:title] = job.css(".jobtitle").text.strip
+      details[:city] = job.css(".location").css("span").text.strip
+      details[:description] = job.css(".summary").text.strip
+
+      binding.pry
+      results << details
+    end
+    results
   end
 
   def self.prep_url(data)
-    # Sample url
-    # https://www.indeed.com/jobs?q=javascript+ruby&l=Duluth%2C+GA
-
-    #No keywords
-    #https://www.indeed.com/jobs?q=&l=Duluth%2C+GA
-
-    # No city
-    # https://www.indeed.com/jobs?q=javascript&l=GA
-
-    # No state
-    # https://www.indeed.com/jobs?q=javascript&l=Duluth
-
-
     base_url = "https://www.indeed.com/jobs?q="
     keywords = data[:keywords].join("+")
     location = "&l="
