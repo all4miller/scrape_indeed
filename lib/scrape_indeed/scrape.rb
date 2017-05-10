@@ -16,9 +16,14 @@ class ScrapeIndeed::Scrape
       details[:title] = job.css(".jobtitle").text.strip
       details[:description] = job.css(".summary").text.strip
       details[:location] = job.css(".location").text.strip
-      title_div = job.css(".jobtitle").css("a")
-      url = title_div[0]["href"]
-      details[:url] = "https://www.indeed.com#{url}"
+
+      begin
+        title_div = job.css(".jobtitle").css("a")
+        url = title_div[0]["href"]
+        details[:url] = "https://www.indeed.com#{url}"
+      rescue
+        details[:url] = ""
+      end
 
       ScrapeIndeed::Job.new(details)
     end
