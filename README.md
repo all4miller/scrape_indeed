@@ -26,6 +26,8 @@ will be saved to an xlsx file on your desktop.
 
   $ scrape-indeed
 
+Note: using Ruby 2.4 will cause a deprecation warning for several gem's usage of ::Fixnum.
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/nicholasbair/scrape_indeed.
