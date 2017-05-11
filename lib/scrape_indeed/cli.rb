@@ -27,12 +27,12 @@ class ScrapeIndeed::CLI
     puts "Please enter keywords (comma or space separated)"
     keywords = gets.strip.downcase.split(/,\s*| /)
     keywords.each { |k| inputs[:keywords] << k }
+    puts "Scraping...one moment"
 
     ScrapeIndeed::Scrape.new.run(inputs)
   end
 
   def scraping
-    puts "Scraping...one moment"
     ScrapeIndeed::Excel.write
     puts "Writing #{ScrapeIndeed::Job.all.length} results to file"
     puts "Done => #{ScrapeIndeed::Excel.config_filename}"
@@ -47,13 +47,13 @@ class ScrapeIndeed::CLI
     if input2 == "1"
       start_menu
     elsif input2 == "2"
-      detail_menu
+      scrape_detail_menu
     else
       post_scrape
     end
   end
 
-  def detail_menu
+  def scrape_detail_menu
     puts "Type:\nPrint - Print 10 results\nBack - Back to main menu\n"
     input =  gets.strip.downcase
     r = ScrapeIndeed::Job.all.length
@@ -69,7 +69,7 @@ class ScrapeIndeed::CLI
     elsif input == "back"
       start_menu
     else
-      detail_menu
+      scrape_detail_menu
     end
   end
 
@@ -78,10 +78,15 @@ class ScrapeIndeed::CLI
     input = gets.strip.downcase
 
     if input == "back"
-      detail_menu
+      scrape_detail_menu
     elsif /\A\d+\z/.match(input)
       print_detail(input)
-      job_menu
+      puts "Would you like to view this job in your browser? (Y/N)"
+      input2 = gets.strip.downcase
+
+      if input2 == "y"
+        system('open', ScrapeIndeed::Job.all[input.to_i - 1].url)
+      end
     else
       job_menu
     end
