@@ -47,29 +47,10 @@ class ScrapeIndeed::CLI
     if input2 == "1"
       start_menu
     elsif input2 == "2"
-      scrape_detail_menu
+      print_results
+      job_menu
     else
       post_scrape
-    end
-  end
-
-  def scrape_detail_menu
-    puts "Type:\nPrint - Print 10 results\nBack - Back to main menu\n"
-    input =  gets.strip.downcase
-    r = ScrapeIndeed::Job.all.length
-
-    if input == "print" && r >= 10
-      print_results(10)
-      job_menu
-    elsif input == "print" && r < 10
-      print_results(r)
-    elsif input == "print" && r == 0
-      print "No results to print, refine your search"
-      start_menu
-    elsif input == "back"
-      start_menu
-    else
-      scrape_detail_menu
     end
   end
 
@@ -78,7 +59,7 @@ class ScrapeIndeed::CLI
     input = gets.strip.downcase
 
     if input == "back"
-      scrape_detail_menu
+      start_menu
     elsif /\A\d+\z/.match(input)
       print_detail(input)
       puts "Would you like to view this job in your browser? (Y/N)"
@@ -87,14 +68,13 @@ class ScrapeIndeed::CLI
       if input2 == "y"
         system('open', ScrapeIndeed::Job.all[input.to_i - 1].url)
       end
-    else
       job_menu
     end
   end
 
-  def print_results(qty)
-    puts "Printing #{qty} results"
-    ScrapeIndeed::Job.all.take(qty).each.with_index do |e,i|
+  def print_results
+    puts "Printing results"
+    ScrapeIndeed::Job.all.each.with_index do |e,i|
       puts "#{i + 1}. #{e.title} @ #{e.company} in #{e.location}."
     end
   end
