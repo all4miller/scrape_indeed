@@ -20,6 +20,7 @@ class ScrapeIndeed::CLI
 
   def config_search
     inputs = {:keywords => []}
+    bar = ProgressBar.new
     puts "Please enter a city:"
     inputs[:city] = gets.strip.downcase
     puts "Please enter a state:"
@@ -28,6 +29,11 @@ class ScrapeIndeed::CLI
     keywords = gets.strip.downcase.split(/,\s*| /)
     keywords.each { |k| inputs[:keywords] << k }
     puts "Scraping...one moment"
+
+    100.times do
+      sleep 0.07
+      bar.increment!
+    end
 
     ScrapeIndeed::Scrape.new.run(inputs)
   end

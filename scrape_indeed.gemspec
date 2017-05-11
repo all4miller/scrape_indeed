@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "axlsx", "~> 2.0", ">= 2.0.1"
   spec.add_dependency "colorize", "~> 0.8.1"
   spec.add_dependency "nokogiri", "~> 1.6", ">= 1.6.8"
+  spec.add_dependency "progress-bar", "~> 1.1"
 end

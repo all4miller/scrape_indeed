@@ -4,6 +4,7 @@ require 'colorize'
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
+require 'progress_bar'
 
 require_relative './scrape_indeed/version'
 require_relative './scrape_indeed/cli'
