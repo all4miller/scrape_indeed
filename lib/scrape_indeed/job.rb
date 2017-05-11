@@ -4,7 +4,6 @@ class ScrapeIndeed::Job
 
   def initialize(data_hash)
     data_hash.each { |k, v| self.send("#{k}=", v) }
-
     @@all << self
   end
 

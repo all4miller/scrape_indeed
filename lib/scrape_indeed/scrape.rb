@@ -28,7 +28,6 @@ class ScrapeIndeed::Scrape
       rescue
         details[:url] = ""
       end
-
       ScrapeIndeed::Job.new(details)
     end
 

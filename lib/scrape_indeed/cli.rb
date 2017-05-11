@@ -21,6 +21,7 @@ class ScrapeIndeed::CLI
   def config_search
     inputs = {:keywords => []}
     bar = ProgressBar.new
+
     puts "Please enter a city:"
     inputs[:city] = gets.strip.downcase
     puts "Please enter a state:"
@@ -34,12 +35,12 @@ class ScrapeIndeed::CLI
       sleep 0.07
       bar.increment!
     end
-
     ScrapeIndeed::Scrape.new.run(inputs)
   end
 
   def scraping
     ScrapeIndeed::Excel.write
+
     puts "Writing #{ScrapeIndeed::Job.all.length} results to file"
     puts "Done => #{ScrapeIndeed::Excel.config_filename}"
     puts "\n\n"
